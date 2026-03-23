@@ -1,6 +1,9 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:finance_app/common/widgets/primary_button.dart';
+import 'package:flutter/material.dart';
+
 import 'package:finance_app/common/constants/app_colors.dart';
 import 'package:finance_app/common/constants/app_text_styles.dart';
-import 'package:flutter/material.dart';
 
 class OnboardingPage extends StatelessWidget {
   const OnboardingPage({super.key});
@@ -33,40 +36,8 @@ class OnboardingPage extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
-                      child: Container(
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                              color: AppColors.greenLigthTwo.withAlpha(90),
-                              offset: const Offset(5, 5),
-                              blurRadius: 10,
-                              spreadRadius: 2
-                            )
-                          ],
-                          gradient: LinearGradient(
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                            colors: AppColors.greenGradient,
-                          ),
-                          borderRadius: BorderRadius.circular(40)
-                        ),
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.transparent,
-                            shadowColor: Colors.transparent,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(40)
-                            )
-                          ),
-                          onPressed: (){},
-                          child: Text(
-                            'Get Started',
-                            style: AppTextStyles.smallText.copyWith(color: AppColors.white),
-                          ),
-                        ),
-                      ),
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: PirmaryButton(text: 'Get Starded', onPressed: (){},),
                     ),
                     Text(
                       'Already Habe Account? Log In',

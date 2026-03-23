@@ -12,7 +12,13 @@ class AppTextStyles {
   static const TextStyle mediumText = TextStyle(
     fontSize: 36,
     fontFamily: 'Inter',
-    fontWeight: FontWeight(700)
+    fontWeight: FontWeight(500)
+  );
+
+  static const TextStyle mediumText18 = TextStyle(
+    fontSize: 18,
+    fontFamily: 'Inter',
+    fontWeight: FontWeight(600)
   );
 
   static const TextStyle smallText = TextStyle(
