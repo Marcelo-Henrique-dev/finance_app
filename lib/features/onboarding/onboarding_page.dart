@@ -70,14 +70,14 @@ class _FloatingManState extends State<FloatingMan>
   void initState() {
     super.initState();
     _controller = AnimationController(
-      duration: const Duration(seconds: 2), // Duração de um ciclo completo
+      duration: const Duration(seconds: 2),
       vsync: this,
-    )..repeat(reverse: true); // Repete a animação invertendo a direção
+    )..repeat(reverse: true);
 
     _animation = Tween<double>(begin: 0, end: 15).animate(
       CurvedAnimation(
         parent: _controller,
-        curve: Curves.easeInOut, // Curva suave para aceleração e desaceleração
+        curve: Curves.easeInOut,
       ),
     );
   }
@@ -94,7 +94,7 @@ class _FloatingManState extends State<FloatingMan>
       animation: _animation,
       builder: (context, child) {
         return Transform.translate(
-          offset: Offset(0, _animation.value), // Aplica o deslocamento vertical
+          offset: Offset(0, _animation.value),
           child: child,
         );
       },
