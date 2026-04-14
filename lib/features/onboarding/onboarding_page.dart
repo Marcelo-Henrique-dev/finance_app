@@ -18,7 +18,9 @@ class OnboardingPage extends StatelessWidget {
             child: Container(
               alignment: Alignment.bottomCenter,
               color: AppColors.iceWhite,
-              child: FloatingMan(),
+              child: Image.asset(
+                'assets/images/man.png'
+              ),
             ),
           ),
           Expanded(
@@ -49,57 +51,6 @@ class OnboardingPage extends StatelessWidget {
             ),
           )
         ],
-      ),
-    );
-  }
-}
-
-class FloatingMan extends StatefulWidget {
-  const FloatingMan({super.key});
-
-  @override
-  State<FloatingMan> createState() => _FloatingManState();
-}
-
-class _FloatingManState extends State<FloatingMan>
-    with SingleTickerProviderStateMixin {
-  late final AnimationController _controller;
-  late final Animation<double> _animation;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(
-      duration: const Duration(seconds: 2),
-      vsync: this,
-    )..repeat(reverse: true);
-
-    _animation = Tween<double>(begin: 0, end: 15).animate(
-      CurvedAnimation(
-        parent: _controller,
-        curve: Curves.easeInOut,
-      ),
-    );
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: _animation,
-      builder: (context, child) {
-        return Transform.translate(
-          offset: Offset(0, _animation.value),
-          child: child,
-        );
-      },
-      child: Image.asset(
-        'assets/images/man.png',
       ),
     );
   }
