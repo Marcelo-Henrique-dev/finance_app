@@ -1,6 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:finance_app/common/widgets/multi_text_button.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import 'package:finance_app/common/constants/app_colors.dart';
@@ -20,7 +19,7 @@ class OnboardingPage extends StatelessWidget {
             child: Container(
               alignment: Alignment.bottomCenter,
               color: AppColors.iceWhite,
-              child: Image.asset('assets/images/man.png'),
+              child: Image.asset('assets/images/onboarding_image.png'),
             ),
           ),
           Expanded(
@@ -60,7 +59,7 @@ class OnboardingPage extends StatelessWidget {
                           style: AppTextStyles.smallText.copyWith(color: AppColors.greenLigthTwo),
                         )
                       ],
-                      onPressed: () => print("Texto Clicado"),
+                      onPressed: () => {},
                     ),
                   ],
                 ),
