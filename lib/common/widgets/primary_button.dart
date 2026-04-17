@@ -30,9 +30,7 @@ class PirmaryButton extends StatelessWidget {
         ),
         child: InkWell(
           borderRadius: _borderRadius,
-          onTap: () {
-            onPressed;
-          },
+          onTap: onPressed,
           child: Align(
             child: Text(
               text,

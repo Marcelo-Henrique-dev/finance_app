@@ -2,6 +2,7 @@
 import 'dart:developer';
 
 import 'package:finance_app/common/widgets/custom_text_form_field.dart';
+import 'package:finance_app/common/widgets/password_form_field.dart';
 import 'package:flutter/material.dart';
 
 import 'package:finance_app/common/constants/app_colors.dart';
@@ -9,16 +10,23 @@ import 'package:finance_app/common/constants/app_text_styles.dart';
 import 'package:finance_app/common/widgets/multi_text_button.dart';
 import 'package:finance_app/common/widgets/primary_button.dart';
 
-class SignUpPage extends StatelessWidget {
+class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
+
+  @override
+  State<SignUpPage> createState() => _SignUpPageState();
+}
+
+class _SignUpPageState extends State<SignUpPage> {
+
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.only(
-          top: 60,
-          bottom: 40,
+          top: 30,
         ),
         child: ListView(
           children: [
@@ -26,55 +34,98 @@ class SignUpPage extends StatelessWidget {
               'Start Saving \n Your Money!',
               textAlign: .center,
               style: AppTextStyles.mediumText.copyWith(
-                color: AppColors.greenLigthTwo
+                color: AppColors.greenTwo
               ),
             ),
             Image.asset(
               'assets/images/sign_up_board.png'
             ),
             Form(
+              key: _formKey,
               child: Column(
                 children: [
                   CustomTextFormField(
                     hintText: "John Doe",
                     labelText: "Your name",
-                    textInputType: TextInputType.emailAddress,
                     textInputAction: TextInputAction.next,
+                    validator: (value) {
+                      if(value != null && value.isEmpty){
+                        return "Esse campo não pode ser vazio";
+                      }
+                      return null;
+                    },
                   ),
+                  CustomTextFormField(
+                    hintText: 'email@email.com',
+                    labelText: 'your email',
+                    textInputAction: TextInputAction.next,
+                    textInputType: TextInputType.emailAddress,
+                    validator: (value) {
+                      if(value != null && value.isEmpty){
+                        return "Esse campo não pode ser vazio";
+                      }
+                      return null;
+                    },
+                  ),
+                  PasswordFormField(
+                    labelText: 'choose your password',
+                    hintText: '*********',
+                    textInputAction: .next,
+                    validator: (value) {
+                      if(value != null && value.isEmpty){
+                        return "Esse campo não pode ser vazio";
+                      }
+                      return null;
+                    },
+                  ),
+                  PasswordFormField(
+                    labelText: 'confirm your password',
+                    hintText: '*********',
+                    textInputAction: .done,
+                    validator: (value) {
+                      if(value != null && value.isEmpty){
+                        return "Esse campo não pode ser vazio";
+                      }
+                      return null;
+                    },
+                  )
                 ],
               ),
             ),
-            Column(
+            Padding(
+              padding: const EdgeInsets.only(
+                top: 20,
+                left: 40,
+                right: 40,
+              ),
+              child: PirmaryButton(
+                text: 'Sign Up',
+                onPressed: (){
+                  final valid = _formKey.currentContext != null && _formKey.currentState!.validate();
+                  if(valid){
+                    log("Continuar lógica de registro");
+                  } else {
+                    log("Erro ao registrar!");
+                  }
+                },
+              ),
+            ),
+            MultiTextButton(
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(
-                    top: 20,
-                    left: 40,
-                    right: 40,
-                  ),
-                  child: PirmaryButton(
-                    text: 'Sign Up',
-                    onPressed: () => log('Register'),
+                Text(
+                  'Already have account? ',
+                  style: AppTextStyles.smallText.copyWith(
+                    color: AppColors.grey
                   ),
                 ),
-                MultiTextButton(
-                  children: [
-                    Text(
-                      'Already have account? ',
-                      style: AppTextStyles.smallText.copyWith(
-                        color: AppColors.grey
-                      ),
-                    ),
-                    Text(
-                      'Log In',
-                      style: AppTextStyles.smallText.copyWith(
-                        color: AppColors.greenLigthTwo
-                      ),
-                    )
-                  ],
-                  onPressed: () => log("Register"),  
-                ),
+                Text(
+                  'Log In',
+                  style: AppTextStyles.smallText.copyWith(
+                    color: AppColors.greenTwo
+                  ),
+                )
               ],
+              onPressed: () => log("Login"),  
             )
           ],
         ),

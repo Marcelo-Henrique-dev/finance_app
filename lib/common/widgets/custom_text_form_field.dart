@@ -10,6 +10,9 @@ class CustomTextFormField extends StatefulWidget {
   final TextEditingController? controller;
   final TextInputType? textInputType;
   final TextInputAction? textInputAction;
+  final Widget? sufixIcon;
+  final bool? obscureText;
+  final FormFieldValidator<String>? validator;
   
   const CustomTextFormField({
     super.key,
@@ -20,6 +23,9 @@ class CustomTextFormField extends StatefulWidget {
     this.controller,
     this.textInputType,
     this.textInputAction,
+    this.sufixIcon,
+    this.obscureText,
+    this.validator,
   });
 
   @override
@@ -30,7 +36,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
 
   final defaultBorder = const OutlineInputBorder(
     borderSide: BorderSide(
-      color: AppColors.greenLigthTwo,
+      color: AppColors.greenTwo,
     ),
     borderRadius: BorderRadius.all(Radius.circular(15),),
   );
@@ -43,15 +49,21 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         horizontal: 24,
       ),
       child: TextFormField(
+        validator: widget.validator,
+        obscureText: widget.obscureText ?? false,
         textInputAction: widget.textInputAction,
         keyboardType: widget.textInputType,
         textCapitalization: widget.textCapitalization ?? TextCapitalization.none,
         controller: widget.controller,
         decoration: InputDecoration(
+          suffixIcon: widget.sufixIcon,
           hintText: widget.hintText,
           labelText: widget.labelText?.toUpperCase(),
-          labelStyle: AppTextStyles.inputLabelText.copyWith(
+          labelStyle: AppTextStyles.inputText.copyWith(
             color: AppColors.grey
+          ),
+          hintStyle: AppTextStyles.inputHintText.copyWith(
+            color: AppColors.greenTwo
           ),
           focusedBorder: defaultBorder,
           errorBorder: defaultBorder.copyWith(

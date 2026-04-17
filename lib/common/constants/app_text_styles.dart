@@ -27,8 +27,14 @@ class AppTextStyles {
     fontWeight: FontWeight(500)
   );
 
-  static const inputLabelText = TextStyle(
+  static const inputText = TextStyle(
     fontSize: 14,
+    fontFamily: 'Inter',
+    fontWeight: .w500
+  );
+
+  static const inputHintText = TextStyle(
+    fontSize: 12,
     fontFamily: 'Inter',
     fontWeight: .w400
   );

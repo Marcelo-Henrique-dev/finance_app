@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 final defaultTheme = ThemeData(
   inputDecorationTheme: InputDecorationTheme(
     focusedBorder: OutlineInputBorder(
-      borderSide: BorderSide(color: AppColors.greenLightOne),
+      borderSide: BorderSide(color: AppColors.greenOne),
     ),
     enabledBorder: OutlineInputBorder(
-      borderSide: BorderSide(color: AppColors.greenLigthTwo),
+      borderSide: BorderSide(color: AppColors.greenTwo),
     ),
     labelStyle: TextStyle(
-      color: AppColors.greenLigthTwo
+      color: AppColors.greenTwo
     ),
   ),
 );

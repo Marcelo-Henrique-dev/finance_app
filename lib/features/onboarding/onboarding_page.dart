@@ -37,7 +37,7 @@ class OnboardingPage extends StatelessWidget {
                     Text(
                       'Spend Smarter \n Save More',
                       style: AppTextStyles.mediumText.copyWith(
-                        color: AppColors.greenLigthTwo,
+                        color: AppColors.greenTwo,
                       ),
                       textAlign: TextAlign.center,
                     ),
@@ -56,7 +56,7 @@ class OnboardingPage extends StatelessWidget {
                         ),
                         Text(
                           'Log In',
-                          style: AppTextStyles.smallText.copyWith(color: AppColors.greenLigthTwo),
+                          style: AppTextStyles.smallText.copyWith(color: AppColors.greenTwo),
                         )
                       ],
                       onPressed: () => {},
