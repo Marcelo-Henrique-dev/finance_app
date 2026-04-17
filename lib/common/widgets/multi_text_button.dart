@@ -6,10 +6,10 @@ class MultiTextButton extends StatelessWidget {
   final VoidCallback? onPressed;
 
   const MultiTextButton({
-    Key? key,
+    super.key,
     required this.children,
     this.onPressed,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
