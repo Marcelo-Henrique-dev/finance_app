@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:finance_app/common/constants/app_colors.dart';
 import 'package:finance_app/common/constants/app_text_styles.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +15,7 @@ class CustomTextFormField extends StatefulWidget {
   final Widget? sufixIcon;
   final bool? obscureText;
   final FormFieldValidator<String>? validator;
+  final String? helperText;
   
   const CustomTextFormField({
     super.key,
@@ -26,6 +29,7 @@ class CustomTextFormField extends StatefulWidget {
     this.sufixIcon,
     this.obscureText,
     this.validator,
+    this.helperText,
   });
 
   @override
@@ -41,6 +45,14 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
     borderRadius: BorderRadius.all(Radius.circular(15),),
   );
 
+  String? _helperText;
+
+  @override
+  void initState() {
+    super.initState();
+    _helperText = widget.helperText;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -49,6 +61,17 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         horizontal: 24,
       ),
       child: TextFormField(
+        onChanged: (value) {
+          if(value.length == 1){
+            setState(() {
+              _helperText = null;
+            });
+          } else if(value.isEmpty){
+            setState(() {
+              _helperText = widget.helperText;  
+            });
+          }
+        },
         validator: widget.validator,
         obscureText: widget.obscureText ?? false,
         textInputAction: widget.textInputAction,
@@ -56,6 +79,8 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         textCapitalization: widget.textCapitalization ?? TextCapitalization.none,
         controller: widget.controller,
         decoration: InputDecoration(
+          helperText: _helperText,
+          helperMaxLines: 3,
           suffixIcon: widget.sufixIcon,
           hintText: widget.hintText,
           labelText: widget.labelText?.toUpperCase(),
