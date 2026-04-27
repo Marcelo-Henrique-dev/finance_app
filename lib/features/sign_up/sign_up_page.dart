@@ -4,6 +4,8 @@ import 'dart:developer';
 import 'package:finance_app/common/utils/validator.dart';
 import 'package:finance_app/common/widgets/custom_text_form_field.dart';
 import 'package:finance_app/common/widgets/password_form_field.dart';
+import 'package:finance_app/features/sign_up/sign_up_controller.dart';
+import 'package:finance_app/features/sign_up/sign_up_state.dart';
 import 'package:flutter/material.dart';
 
 import 'package:finance_app/common/constants/app_colors.dart';
@@ -21,6 +23,45 @@ class SignUpPage extends StatefulWidget {
 class _SignUpPageState extends State<SignUpPage> {
   final _formKey = GlobalKey<FormState>();
   final _passwordController = TextEditingController();
+  final _controller = SignUpController();
+
+  @override
+  void dispose() {
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _controller.addListener(() {
+      if (_controller.state is SignUpLoadingState) {
+        showDialog(
+          context: context,
+          builder: (context) => Center(child: CircularProgressIndicator()),
+        );
+      }
+      if (_controller.state is SignUpSuccesState) {
+        Navigator.pop(context);
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) =>
+                Scaffold(body: Center(child: Text('Nova Tela'))),
+          ),
+        );
+      }
+      if (_controller.state is SignUpErrorState) {
+        showDialog(
+          context: context,
+          builder: (context) => SizedBox(
+            height: 150,
+            child: Text("Erro ao logar, tente novamente"),
+          ),
+        );
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +108,10 @@ class _SignUpPageState extends State<SignUpPage> {
                     labelText: 'confirm your password',
                     hintText: '*********',
                     textInputAction: .done,
-                    validator: (value) => Validator.validateConfirmPassword(value, _passwordController.text),
+                    validator: (value) => Validator.validateConfirmPassword(
+                      value,
+                      _passwordController.text,
+                    ),
                   ),
                 ],
               ),
@@ -81,7 +125,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       _formKey.currentContext != null &&
                       _formKey.currentState!.validate();
                   if (valid) {
-                    log("Continuar lógica de registro");
+                    _controller.doSignUp();
                   } else {
                     log("Erro ao registrar!");
                   }
